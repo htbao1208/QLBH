@@ -1,0 +1,62 @@
+## .gitignore cho project WinForms (C# / .NET, Visual Studio)
+
+# ===== Thư mục build =====
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+build/
+bld/
+
+# ===== Thư mục/tệp riêng của Visual Studio =====
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.userprefs
+*.rsuser
+launchSettings.json
+.vscode/
+
+# ===== Cache, log, kết quả test =====
+*.log
+*.tmp
+*.cache
+*.pdb
+[Tt]est[Rr]esult*/
+*.VisualState.xml
+TestResult.xml
+_ReSharper*/
+*.DotSettings.user
+.idea/
+
+# ===== NuGet =====
+*.nupkg
+*.snupkg
+**/[Pp]ackages/*
+!**/[Pp]ackages/build/
+project.lock.json
+
+# ===== File sao lưu / tạm của Windows, macOS =====
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
+*.bak
+*.orig
+~$*
+
+# ===== File nén (tránh đẩy bài nộp lên repo) =====
+*.zip
+*.rar
+*.7z
+
+# ===== GIỮ LẠI (không bị ignore) =====
+# File database mẫu của nhóm
+!Database/
+!Database/*.sql
