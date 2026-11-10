@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -54,12 +54,13 @@ namespace QLBH.GUI
         }
         private void btnHoaDon_Click(object sender, EventArgs e)
         {
-            MoFormCon(new frmHoaDon());
+            //Tạm ẩn vì chưa có form frmHoaDon
+            /*MoFormCon(new frmHoaDon());*/
         }
 
         private void btnHoaDon_Click_1(object sender, EventArgs e)
         {
-            btnHoaDon_Click(sender, e);
+
         }
 
         private void pnlContent_Paint(object sender, PaintEventArgs e)
@@ -83,4 +84,3 @@ namespace QLBH.GUI
         }
     }
 }
-
