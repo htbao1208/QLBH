@@ -2,7 +2,7 @@
 {
     public class DTOLoaiSanPham
     {
-        private string maLoai;
+        private string maLoai = "";
 
         public string MaLoai
         {

@@ -44,8 +44,7 @@ namespace QLBH.GUI
 
         private void btnLoaiSanPham_Click(object sender, EventArgs e)
         {
-            //Tạm ẩn vì chưa có form frmLoaiSanPham
-            /*MoFormCon(new frmLoaiSanPham());*/
+            MoFormCon(new frmLoaiSanPham());
         }
         private void btnKhachHang_Click(object sender, EventArgs e)
         {
