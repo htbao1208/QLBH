@@ -40,8 +40,11 @@
             btnSanPham = new Button();
             button1 = new Button();
             pnlContent = new Panel();
+            pictureBox1 = new PictureBox();
             pnlHeader.SuspendLayout();
             pnlMenu.SuspendLayout();
+            pnlContent.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // pnlHeader
@@ -185,21 +188,33 @@
             button1.Name = "button1";
             button1.Size = new Size(188, 59);
             button1.TabIndex = 0;
-            button1.Text = "Dashboard";
+            button1.Text = "Tổng quan";
             button1.TextAlign = ContentAlignment.MiddleLeft;
             button1.TextImageRelation = TextImageRelation.ImageBeforeText;
             button1.UseVisualStyleBackColor = false;
+            button1.Click += btnDashboard_Click;
             // 
             // pnlContent
             // 
             pnlContent.AllowDrop = true;
             pnlContent.BackColor = Color.FromArgb(243, 244, 246);
+            pnlContent.Controls.Add(pictureBox1);
             pnlContent.ForeColor = SystemColors.ControlText;
             pnlContent.Location = new Point(195, 61);
             pnlContent.Name = "pnlContent";
             pnlContent.Size = new Size(827, 636);
             pnlContent.TabIndex = 2;
             pnlContent.Paint += pnlContent_Paint;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(-38, -15);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(900, 687);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 0;
+            pictureBox1.TabStop = false;
             // 
             // frmMain
             // 
@@ -210,12 +225,15 @@
             Controls.Add(pnlMenu);
             Controls.Add(pnlHeader);
             Icon = (Icon)resources.GetObject("$this.Icon");
+            MaximizeBox = false;
             Name = "frmMain";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Main";
             pnlHeader.ResumeLayout(false);
             pnlHeader.PerformLayout();
             pnlMenu.ResumeLayout(false);
+            pnlContent.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
 
@@ -224,7 +242,6 @@
         private Panel pnlHeader;
         private Panel pnlMenu;
         private Label lblNguoiDung;
-        private Panel pnlContent;
         private Button button1;
         private Button btnLoaiSanPham;
         private Button btnSanPham;
@@ -232,5 +249,7 @@
         private Button btnDangXuat;
         private Button btnHoaDon;
         private Label lblTenCuaHang;
+        private Panel pnlContent;
+        private PictureBox pictureBox1;
     }
 }

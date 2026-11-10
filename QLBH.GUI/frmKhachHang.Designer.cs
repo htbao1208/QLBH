@@ -67,7 +67,7 @@ namespace QLBH.GUI
             // lblTieuDe
             // 
             lblTieuDe.Font = new Font("Segoe UI", 17F, FontStyle.Bold);
-            lblTieuDe.Location = new Point(65, 9);
+            lblTieuDe.Location = new Point(73, 12);
             lblTieuDe.Margin = new Padding(4, 0, 4, 0);
             lblTieuDe.Name = "lblTieuDe";
             lblTieuDe.Size = new Size(700, 53);
@@ -84,6 +84,7 @@ namespace QLBH.GUI
             grpThongTin.Controls.Add(lblPhai);
             grpThongTin.Controls.Add(txtMaKH);
             grpThongTin.Controls.Add(txtTenKH);
+            grpThongTin.Controls.Add(btnLoad);
             grpThongTin.Controls.Add(txtDiaChi);
             grpThongTin.Controls.Add(txtDienThoai);
             grpThongTin.Controls.Add(rdoNam);
@@ -92,7 +93,6 @@ namespace QLBH.GUI
             grpThongTin.Controls.Add(btnUpdate);
             grpThongTin.Controls.Add(btnDelete);
             grpThongTin.Controls.Add(btnReset);
-            grpThongTin.Controls.Add(btnLoad);
             grpThongTin.Location = new Point(17, 73);
             grpThongTin.Margin = new Padding(4);
             grpThongTin.Name = "grpThongTin";
@@ -211,50 +211,50 @@ namespace QLBH.GUI
             // 
             // btnInsert
             // 
-            btnInsert.Location = new Point(90, 156);
+            btnInsert.Location = new Point(304, 156);
             btnInsert.Margin = new Padding(4);
             btnInsert.Name = "btnInsert";
-            btnInsert.Size = new Size(166, 43);
+            btnInsert.Size = new Size(91, 43);
             btnInsert.TabIndex = 11;
             btnInsert.Text = "Thêm";
             btnInsert.Click += btnInsert_Click;
             // 
             // btnUpdate
             // 
-            btnUpdate.Location = new Point(264, 156);
+            btnUpdate.Location = new Point(403, 156);
             btnUpdate.Margin = new Padding(4);
             btnUpdate.Name = "btnUpdate";
-            btnUpdate.Size = new Size(166, 43);
+            btnUpdate.Size = new Size(89, 43);
             btnUpdate.TabIndex = 12;
             btnUpdate.Text = "Sửa";
             btnUpdate.Click += btnUpdate_Click;
             // 
             // btnDelete
             // 
-            btnDelete.Location = new Point(438, 156);
+            btnDelete.Location = new Point(500, 156);
             btnDelete.Margin = new Padding(4);
             btnDelete.Name = "btnDelete";
-            btnDelete.Size = new Size(166, 43);
+            btnDelete.Size = new Size(78, 43);
             btnDelete.TabIndex = 13;
             btnDelete.Text = "Xóa";
             btnDelete.Click += btnDelete_Click;
             // 
             // btnReset
             // 
-            btnReset.Location = new Point(612, 156);
+            btnReset.Location = new Point(586, 156);
             btnReset.Margin = new Padding(4);
             btnReset.Name = "btnReset";
-            btnReset.Size = new Size(166, 43);
+            btnReset.Size = new Size(93, 43);
             btnReset.TabIndex = 14;
             btnReset.Text = "Làm mới";
             btnReset.Click += btnReset_Click;
             // 
             // btnLoad
             // 
-            btnLoad.Location = new Point(846, 196);
+            btnLoad.Location = new Point(687, 156);
             btnLoad.Margin = new Padding(4);
             btnLoad.Name = "btnLoad";
-            btnLoad.Size = new Size(166, 43);
+            btnLoad.Size = new Size(91, 43);
             btnLoad.TabIndex = 15;
             btnLoad.Text = "Tải lại";
             btnLoad.Click += btnLoad_Click;

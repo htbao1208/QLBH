@@ -36,7 +36,10 @@ namespace QLBH.GUI
 
             formCon.Show();
         }
-
+        private void btnDashboard_Click(object sender, EventArgs e)
+        {
+            MoFormCon(new frmOverview());
+        }
         private void btnSanPham_Click(object sender, EventArgs e)
         {
             MoFormCon(new frmSanPham());
