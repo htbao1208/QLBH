@@ -13,6 +13,9 @@ namespace QLBH.GUI
         private void InitializeComponent()
         {
             layout = new TableLayoutPanel();
+            danhSach = new TableLayoutPanel();
+            lblDanhSachHoaDon = new Label();
+            cboDanhSachHoaDon = new ComboBox();
             lblTieuDe = new Label();
             grpThongTin = new GroupBox();
             thongTin = new TableLayoutPanel();
@@ -44,7 +47,11 @@ namespace QLBH.GUI
             footer = new TableLayoutPanel();
             lblTongTien = new Label();
             btnLuu = new Button();
+            btnLamTrong = new Button();
+            btnCapNhat = new Button();
+            btnXoaHoaDon = new Button();
             layout.SuspendLayout();
+            danhSach.SuspendLayout();
             grpThongTin.SuspendLayout();
             thongTin.SuspendLayout();
             grpSanPham.SuspendLayout();
@@ -56,19 +63,38 @@ namespace QLBH.GUI
 
             layout.ColumnCount = 1;
             layout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            layout.RowCount = 5;
-            layout.RowStyles.Add(new RowStyle(SizeType.Absolute, 42F));
-            layout.RowStyles.Add(new RowStyle(SizeType.Absolute, 118F));
-            layout.RowStyles.Add(new RowStyle(SizeType.Absolute, 145F));
+            layout.RowCount = 6;
+            layout.RowStyles.Add(new RowStyle(SizeType.Absolute, 34F));
+            layout.RowStyles.Add(new RowStyle(SizeType.Absolute, 36F));
+            layout.RowStyles.Add(new RowStyle(SizeType.Absolute, 108F));
+            layout.RowStyles.Add(new RowStyle(SizeType.Absolute, 140F));
             layout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            layout.RowStyles.Add(new RowStyle(SizeType.Absolute, 58F));
+            layout.RowStyles.Add(new RowStyle(SizeType.Absolute, 144F));
             layout.Dock = DockStyle.Fill;
             layout.Padding = new Padding(12);
-            layout.Controls.Add(lblTieuDe, 0, 0);
-            layout.Controls.Add(grpThongTin, 0, 1);
-            layout.Controls.Add(grpSanPham, 0, 2);
-            layout.Controls.Add(dgvChiTiet, 0, 3);
-            layout.Controls.Add(footer, 0, 4);
+            layout.Controls.Add(danhSach, 0, 0);
+            layout.Controls.Add(lblTieuDe, 0, 1);
+            layout.Controls.Add(grpThongTin, 0, 2);
+            layout.Controls.Add(grpSanPham, 0, 3);
+            layout.Controls.Add(dgvChiTiet, 0, 4);
+            layout.Controls.Add(footer, 0, 5);
+
+            danhSach.Dock = DockStyle.Fill;
+            danhSach.Margin = new Padding(0);
+            danhSach.ColumnCount = 2;
+            danhSach.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 155F));
+            danhSach.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            danhSach.RowCount = 1;
+            danhSach.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            danhSach.Controls.Add(lblDanhSachHoaDon, 0, 0);
+            danhSach.Controls.Add(cboDanhSachHoaDon, 1, 0);
+            lblDanhSachHoaDon.Text = "Danh sách hóa đơn";
+            lblDanhSachHoaDon.Dock = DockStyle.Fill;
+            lblDanhSachHoaDon.TextAlign = ContentAlignment.MiddleLeft;
+            cboDanhSachHoaDon.Name = "cboDanhSachHoaDon";
+            cboDanhSachHoaDon.Dock = DockStyle.Fill;
+            cboDanhSachHoaDon.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboDanhSachHoaDon.SelectionChangeCommitted += cboDanhSachHoaDon_SelectionChangeCommitted;
 
             lblTieuDe.Text = "LẬP HÓA ĐƠN";
             lblTieuDe.Font = new Font("Segoe UI", 15F, FontStyle.Bold);
@@ -194,7 +220,9 @@ namespace QLBH.GUI
 
             dgvChiTiet.Name = "dgvChiTiet";
             dgvChiTiet.Dock = DockStyle.Fill;
-            dgvChiTiet.ReadOnly = true;
+            dgvChiTiet.ReadOnly = false;
+            dgvChiTiet.CellValidating += dgvChiTiet_CellValidating;
+            dgvChiTiet.CellEndEdit += dgvChiTiet_CellEndEdit;
             dgvChiTiet.AllowUserToAddRows = false;
             dgvChiTiet.AllowUserToDeleteRows = false;
             dgvChiTiet.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
@@ -205,14 +233,17 @@ namespace QLBH.GUI
             dgvChiTiet.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             dgvChiTiet.Columns.AddRange(colMaSP, colTenSP, colDVTinh, colSoLuong, colGiaBan, colThanhTien);
             colMaSP.Name = "colMaSP";
+            colMaSP.ReadOnly = true;
             colMaSP.DataPropertyName = "MaSP";
             colMaSP.HeaderText = "Mã SP";
             colMaSP.FillWeight = 65F;
             colTenSP.Name = "colTenSP";
+            colTenSP.ReadOnly = true;
             colTenSP.DataPropertyName = "TenSP";
             colTenSP.HeaderText = "Tên sản phẩm";
             colTenSP.FillWeight = 180F;
             colDVTinh.Name = "colDVTinh";
+            colDVTinh.ReadOnly = true;
             colDVTinh.DataPropertyName = "DVTinh";
             colDVTinh.HeaderText = "Đơn vị tính";
             colDVTinh.FillWeight = 70F;
@@ -221,11 +252,13 @@ namespace QLBH.GUI
             colSoLuong.HeaderText = "Số lượng";
             colSoLuong.FillWeight = 65F;
             colGiaBan.Name = "colGiaBan";
+            colGiaBan.ReadOnly = true;
             colGiaBan.DataPropertyName = "GiaBan";
             colGiaBan.HeaderText = "Giá bán";
             colGiaBan.DefaultCellStyle.Format = "N0";
             colGiaBan.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             colThanhTien.Name = "colThanhTien";
+            colThanhTien.ReadOnly = true;
             colThanhTien.DataPropertyName = "ThanhTien";
             colThanhTien.HeaderText = "Thành tiền";
             colThanhTien.DefaultCellStyle.Format = "N0";
@@ -235,21 +268,46 @@ namespace QLBH.GUI
             footer.ColumnCount = 2;
             footer.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             footer.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 160F));
-            footer.RowCount = 1;
-            footer.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            footer.RowCount = 4;
+            footer.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
+            footer.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
+            footer.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
+            footer.RowStyles.Add(new RowStyle(SizeType.Percent, 25F));
             footer.Controls.Add(lblTongTien, 0, 0);
+            footer.SetRowSpan(lblTongTien, 4);
             footer.Controls.Add(btnLuu, 1, 0);
+            footer.Controls.Add(btnLamTrong, 1, 1);
+            footer.Controls.Add(btnCapNhat, 1, 2);
+            footer.Controls.Add(btnXoaHoaDon, 1, 3);
             lblTongTien.Name = "lblTongTien";
             lblTongTien.Text = "Tổng tiền: 0 đồng";
             lblTongTien.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
             lblTongTien.Dock = DockStyle.Fill;
-            lblTongTien.TextAlign = ContentAlignment.MiddleLeft;
+            lblTongTien.TextAlign = ContentAlignment.TopLeft;
+            lblTongTien.Padding = new Padding(0, 10, 0, 0);
             btnLuu.Name = "btnLuu";
             btnLuu.Text = "Lưu hóa đơn";
             btnLuu.BackColor = Color.FromArgb(31, 41, 55);
             btnLuu.ForeColor = Color.White;
             btnLuu.Dock = DockStyle.Fill;
             btnLuu.Click += btnLuu_Click;
+
+            btnLamTrong.Name = "btnLamTrong";
+            btnLamTrong.Text = "Làm trống";
+            btnLamTrong.Dock = DockStyle.Fill;
+            btnLamTrong.CausesValidation = false;
+            btnLamTrong.Click += btnLamTrong_Click;
+            btnCapNhat.Name = "btnCapNhat";
+            btnCapNhat.Text = "Cập nhật";
+            btnCapNhat.Dock = DockStyle.Fill;
+            btnCapNhat.Enabled = false;
+            btnCapNhat.Click += btnCapNhat_Click;
+            btnXoaHoaDon.Name = "btnXoaHoaDon";
+            btnXoaHoaDon.Text = "Xóa";
+            btnXoaHoaDon.Dock = DockStyle.Fill;
+            btnXoaHoaDon.Enabled = false;
+            btnXoaHoaDon.CausesValidation = false;
+            btnXoaHoaDon.Click += btnXoaHoaDon_Click;
 
             AutoScaleDimensions = new SizeF(7F, 19F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -261,6 +319,7 @@ namespace QLBH.GUI
             Text = "Hóa đơn";
             Load += frmHoaDon_Load;
             layout.ResumeLayout(false);
+            danhSach.ResumeLayout(false);
             grpThongTin.ResumeLayout(false);
             thongTin.ResumeLayout(false);
             thongTin.PerformLayout();
@@ -273,7 +332,9 @@ namespace QLBH.GUI
             ResumeLayout(false);
         }
 
-        private TableLayoutPanel layout, thongTin, sanPham, footer;
+        private TableLayoutPanel layout, thongTin, sanPham, footer, danhSach;
+        private Label lblDanhSachHoaDon;
+        private ComboBox cboDanhSachHoaDon;
         private GroupBox grpThongTin, grpSanPham;
         private Label lblTieuDe, lblMaHD, lblNgayHD, lblKhachHang, lblNhanVien;
         private Label lblSanPham, lblSoLuong, lblGiaBan, lblTongTien;
@@ -281,7 +342,7 @@ namespace QLBH.GUI
         private ComboBox cboKhachHang, cboNhanVien, cboSanPham;
         private DateTimePicker dtpNgayHD;
         private NumericUpDown nudSoLuong;
-        private Button btnThemDong, btnXoaDong, btnLuu;
+        private Button btnThemDong, btnXoaDong, btnLuu, btnLamTrong, btnCapNhat, btnXoaHoaDon;
         private DataGridView dgvChiTiet;
         private DataGridViewTextBoxColumn colMaSP, colTenSP, colDVTinh, colSoLuong, colGiaBan, colThanhTien;
     }

@@ -11,6 +11,25 @@ namespace QLBH.BLL
         public DataTable LoadKhachHang() => dal.LoadKhachHang();
         public DataTable LoadNhanVien() => dal.LoadNhanVien();
         public DataTable LoadSanPham() => dal.LoadSanPham();
+        public DataTable LoadDanhSachHoaDon() => dal.LoadDanhSachHoaDon();
+
+        private static string KiemTraMaHoaDon(string maHD)
+        {
+            maHD = maHD.Trim();
+            if (maHD.Length == 0 || maHD.Length > 10)
+                throw new ArgumentException("Vui lòng chọn hóa đơn hợp lệ.");
+            return maHD;
+        }
+
+        public DTOHoaDon LayHoaDon(string maHD)
+        {
+            var hoaDon = dal.LayHoaDon(KiemTraMaHoaDon(maHD))
+                ?? throw new InvalidOperationException("Hóa đơn không còn tồn tại. Vui lòng tải lại danh sách.");
+            hoaDon.ThanhTien = TinhTongTien(hoaDon.ChiTiet);
+            return hoaDon;
+        }
+
+        public void XoaHoaDon(string maHD) => dal.XoaHoaDon(KiemTraMaHoaDon(maHD));
 
         // SQL mẫu lưu ThanhTien bằng int, nên kiểm tra trước khi lưu.
         public static int TinhTongTien(IEnumerable<DTOChiTietHoaDon> chiTiet)
@@ -36,6 +55,18 @@ namespace QLBH.BLL
 
         public void LuuHoaDon(DTOHoaDon hoaDon)
         {
+            KiemTraHoaDon(hoaDon);
+            dal.LuuHoaDon(hoaDon);
+        }
+
+        public void CapNhatHoaDon(DTOHoaDon hoaDon)
+        {
+            KiemTraHoaDon(hoaDon);
+            dal.CapNhatHoaDon(hoaDon);
+        }
+
+        private static void KiemTraHoaDon(DTOHoaDon hoaDon)
+        {
             hoaDon.MaHD = hoaDon.MaHD.Trim();
             hoaDon.MaKH = hoaDon.MaKH.Trim();
             hoaDon.MaNV = hoaDon.MaNV.Trim();
@@ -51,7 +82,6 @@ namespace QLBH.BLL
                 throw new ArgumentException("Hóa đơn phải có ít nhất một dòng sản phẩm.");
 
             hoaDon.ThanhTien = TinhTongTien(hoaDon.ChiTiet);
-            dal.LuuHoaDon(hoaDon);
         }
     }
 }
