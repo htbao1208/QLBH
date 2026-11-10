@@ -137,6 +137,7 @@
             btnKhachHang.TextAlign = ContentAlignment.MiddleLeft;
             btnKhachHang.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnKhachHang.UseVisualStyleBackColor = true;
+            btnKhachHang.Click += btnKhachHang_Click;
             // 
             // btnLoaiSanPham
             // 

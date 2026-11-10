@@ -222,5 +222,10 @@ namespace QLBH.GUI
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void lblTenKH_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

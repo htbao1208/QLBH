@@ -48,8 +48,8 @@ namespace QLBH.GUI
         }
         private void btnKhachHang_Click(object sender, EventArgs e)
         {
-            //Tạm ẩn vì chưa có form frmKhachHang
-            /*MoFormCon(new frmKhachHang());*/
+           
+            MoFormCon(new frmKhachHang());
         }
         private void btnHoaDon_Click(object sender, EventArgs e)
         {
