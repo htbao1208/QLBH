@@ -10,9 +10,10 @@ namespace QLBH.GUI
 {
     public partial class frmMain : Form
     {
-        public frmMain()
+        public frmMain(string taiKhoan)
         {
             InitializeComponent();
+            lblNguoiDung.Text = "Xin chào: " + taiKhoan;
 
             btnSanPham.Click += btnSanPham_Click;
         }
